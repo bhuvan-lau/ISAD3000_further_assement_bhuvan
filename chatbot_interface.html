@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eecms.chat</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          Inter,
+          -apple-system,
+          Roboto,
+          Helvetica,
+          sans-serif;
+        background-color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Top Navigation Bar */
+      .topbar {
+        width: 100%;
+        height: 71px;
+        background-color: #b7821a;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .logo {
+        width: 53px;
+        height: 53px;
+      }
+
+      .site-title {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 100%;
+      }
+
+      .navigation-pills {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 32px;
+      }
+
+      .nav-pill {
+        display: flex;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 100%;
+      }
+
+      .nav-pill.active {
+        background-color: #f5f5f5;
+        color: #1e1e1e;
+      }
+
+      .nav-pill.inactive {
+        color: #f3f3f3;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        padding-bottom: 128px;
+      }
+
+      .main-title {
+        color: #b7821a;
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 100%;
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      .quick-answers-section {
+        width: 100%;
+        max-width: 1024px;
+      }
+
+      .quick-answers-title {
+        color: #000000;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 100%;
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .question-templates {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      .quick-answer-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 16px;
+        color: #000000;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 100%;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .quick-answer-btn:hover {
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.15),
+          0 10px 10px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-course {
+        min-width: 260px;
+      }
+      .btn-unit {
+        min-width: 240px;
+      }
+      .btn-prerequisites {
+        min-width: 320px;
+      }
+      .btn-contact {
+        min-width: 250px;
+      }
+      .btn-electives {
+        min-width: 400px;
+      }
+
+      /* Input Section */
+      .input-section {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 896px;
+        padding: 0 16px;
+      }
+
+      .input-container {
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 16px;
+        padding: 8px;
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      }
+
+      .plus-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 2px solid #b7821a;
+        border-radius: 12px;
+        color: #b7821a;
+        cursor: pointer;
+        margin-right: 12px;
+        flex-shrink: 0;
+      }
+
+      .plus-button:hover {
+        background-color: #b7821a;
+        color: #ffffff;
+      }
+
+      .text-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 18px;
+        color: #000000;
+        outline: none;
+      }
+
+      .text-input::placeholder {
+        color: rgba(0, 0, 0, 0.5);
+        opacity: 1;
+      }
+
+      /* Bottom Bar */
+      .bottombar {
+        width: 100%;
+        height: 34px;
+        background-color: #b7821a;
+        display: flex;
+        align-items: center;
+        padding: 0 6px;
+      }
+
+      .admin-login {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 100%;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navigation-pills {
+          margin-left: 16px;
+        }
+
+        .main-title {
+          font-size: 28px;
+          margin-bottom: 48px;
+        }
+
+        .quick-answers-title {
+          font-size: 20px;
+          margin-bottom: 32px;
+        }
+
+        .button-row {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .quick-answer-btn {
+          width: 100%;
+          max-width: 400px;
+          min-width: auto;
+        }
+
+        .input-section {
+          bottom: 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo-section {
+          gap: 12px;
+        }
+
+        .site-title {
+          font-size: 18px;
+        }
+
+        .navigation-pills {
+          margin-left: 8px;
+        }
+
+        .nav-pill {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+
+        .main-title {
+          font-size: 24px;
+        }
+
+        .quick-answer-btn {
+          font-size: 16px;
+          padding: 10px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <div class="topbar">
+      <div class="logo-section">
+        <img
+          src="https://api.builder.io/api/v1/image/assets/TEMP/920c384f5197917b4f57feb331df11da91c96b0a?width=106"
+          alt="Logo"
+          class="logo"
+        />
+        <h1 class="site-title">eecms.chat</h1>
+      </div>
+
+      <div class="navigation-pills">
+        <div class="nav-pill active">Chat</div>
+        <div class="nav-pill inactive">Study Plan</div>
+        <div class="nav-pill inactive">FAQs</div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2 class="main-title">What can I help you with?</h2>
+
+      <div class="quick-answers-section">
+        <h3 class="quick-answers-title">Quick Answers</h3>
+
+        <div class="question-templates">
+          <!-- First row -->
+          <div class="button-row">
+            <button class="quick-answer-btn btn-course">
+              Tell me about a course...
+            </button>
+            <button class="quick-answer-btn btn-unit">
+              Tell me about a unit...
+            </button>
+            <button class="quick-answer-btn btn-prerequisites">
+              What are the prerequisites for...
+            </button>
+          </div>
+
+          <!-- Second row -->
+          <div class="button-row">
+            <button class="quick-answer-btn btn-contact">
+              Who can I contact for...
+            </button>
+            <button class="quick-answer-btn btn-electives">
+              What electives are recommended for...
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Input Section -->
+    <div class="input-section">
+      <div class="input-container">
+        <button class="plus-button">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </button>
+        <input
+          type="text"
+          class="text-input"
+          placeholder="Ask about courses/units here"
+        />
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottombar">
+      <span class="admin-login">Admin Login</span>
+    </div>
+  </body>
+</html>
